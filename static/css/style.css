@@ -1,0 +1,19 @@
+a {
+    color: black;
+    margin-left: 0.5em;
+    margin-right: 0.5em;
+}
+
+a:hover {
+    color: black;
+}
+
+.image {
+    width: 100%;
+    max-width: 600px;
+    padding: 1em;
+}
+
+.image:hover {
+    padding: 0.5em;
+}
