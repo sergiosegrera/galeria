@@ -1,5 +1,0 @@
-package: .
-import:
-- package: github.com/gin-contrib/gzip
-- package: github.com/gin-gonic/gin
-- package: github.com/mattn/go-sqlite3
