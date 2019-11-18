@@ -4,10 +4,14 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+type Settings struct {
+	WebsiteName string
+}
+
 func home(c *gin.Context) {
 	c.HTML(200, "home.tmpl", gin.H{
-		"pageName":    "home",
-		"websiteName": "galeria",
+		"settings": settings,
+		"pageName": "home",
 	})
 }
 
