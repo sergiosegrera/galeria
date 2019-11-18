@@ -40,3 +40,8 @@
 [prune]
   go-tests = true
   unused-packages = true
+
+[metadata.heroku]
+  root-package = "github.com/sergiosegrera/galeria"
+  go-verion = "1.13"
+  install = [ "./..." ]
