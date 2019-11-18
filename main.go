@@ -6,6 +6,7 @@ import (
 	"github.com/gin-gonic/gin"
 	_ "github.com/mattn/go-sqlite3"
 	"log"
+	"os"
 )
 
 var (
@@ -14,6 +15,12 @@ var (
 )
 
 func main() {
+	port := os.Getenv("PORT")
+
+	if port == "" {
+		port = "8080"
+	}
+
 	database, _ = sql.Open("sqlite3", "./galeria.db")
 	defer database.Close()
 
@@ -32,7 +39,7 @@ func main() {
 
 	router.NoRoute(notFound)
 
-	router.Run(":8080")
+	router.Run(":" + port)
 	log.Println("Started on port 8080")
 }
 
