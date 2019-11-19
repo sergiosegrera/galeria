@@ -5,7 +5,8 @@ import (
 )
 
 type Settings struct {
-	WebsiteName string
+	WebsiteName   string
+	AdminPassword string
 }
 
 func home(c *gin.Context) {

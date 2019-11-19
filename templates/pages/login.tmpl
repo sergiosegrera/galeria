@@ -1,0 +1,13 @@
+{{ template "htmlHead" . }}
+    <div class="col-sm-5 mx-auto mt-5">
+        <form action="/admin" method="POST">
+            <div class="form-group">
+                <label for="passwordInput">Create a password</label>
+                <input type="password" class="form-control" id="passwordInput" placeholder="Password">
+            </div>
+            <div class="text-center">
+            <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </form>
+    </div>
+{{ template "htmlFooter" }}

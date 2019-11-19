@@ -4,7 +4,8 @@ import (
 	"database/sql"
 	"github.com/gin-contrib/gzip"
 	"github.com/gin-gonic/gin"
-	_ "github.com/mattn/go-sqlite3"
+	_ "github.com/lib/pq"
+	//_ "github.com/mattn/go-sqlite3"
 	"log"
 	"os"
 )
@@ -16,12 +17,13 @@ var (
 
 func main() {
 	port := os.Getenv("PORT")
+	databaseUrl, _ := os.LookupEnv("DATABASE_URL")
 
 	if port == "" {
 		port = "8080"
 	}
 
-	database, _ = sql.Open("sqlite3", "./galeria.db")
+	database, _ = sql.Open("postgres", databaseUrl)
 	defer database.Close()
 
 	loadSettings()
@@ -35,7 +37,9 @@ func main() {
 
 	router.GET("/", home)
 	router.GET("/about", about)
+
 	router.GET("/admin", admin)
+	router.POST("/admin", adminPost)
 
 	router.NoRoute(notFound)
 
@@ -55,7 +59,25 @@ func loadSettings() {
 		switch name {
 		case "WebsiteName":
 			settings.WebsiteName = value
+		case "AdminPassword":
+			settings.AdminPassword = value
 		}
 	}
 	rows.Close()
+
+	if settings.WebsiteName == "" {
+		_, err := database.Exec("INSERT INTO settings (name, value) VALUES ($1, $2)", "WebsiteName", "Galeria")
+		if err != nil {
+			log.Println(err.Error())
+		}
+		settings.WebsiteName = "Galeria"
+	}
+
+	if settings.AdminPassword == "" {
+		_, err := database.Exec("INSERT INTO settings (name, value) VALUES ($1, $2)", "AdminPassword", "")
+		if err != nil {
+			log.Println(err.Error())
+		}
+		settings.AdminPassword = ""
+	}
 }
