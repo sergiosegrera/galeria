@@ -38,8 +38,8 @@ func main() {
 	router.GET("/", home)
 	router.GET("/about", about)
 
-	router.GET("/admin", admin)
-	router.POST("/admin", adminPost)
+	router.GET("/admin", adminLogin)
+	router.POST("/admin", adminLoginPost)
 
 	router.NoRoute(notFound)
 

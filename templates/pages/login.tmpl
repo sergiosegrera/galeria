@@ -1,9 +1,13 @@
 {{ template "htmlHead" . }}
-    <div class="col-sm-5 mx-auto mt-5">
-        <form action="/admin" method="POST">
+    <div class="col-sm-6 mx-auto m-5 p-4 border rounded">
+        <form action="/admin" method="POST" enctype="multipart/form-data">
             <div class="form-group">
-                <label for="passwordInput">Create a password</label>
-                <input type="password" class="form-control" id="passwordInput" placeholder="Password">
+                <label for="password">{{ .inputMessage }}</label>
+                {{ if .wrongPassword }}
+                    <input type="password" class="form-control is-invalid" name="password" placeholder="Password">
+                {{ else }} 
+                    <input type="password" class="form-control" name="password" placeholder="Password">
+                {{ end }}
             </div>
             <div class="text-center">
             <button type="submit" class="btn btn-primary">Submit</button>
