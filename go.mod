@@ -4,9 +4,10 @@ go 1.13
 
 require (
 	github.com/gin-contrib/gzip v0.0.1
-	github.com/gin-contrib/sessions v0.0.1 // indirect
+	github.com/gin-contrib/sessions v0.0.1
 	github.com/gin-gonic/gin v1.4.0
 	github.com/lib/pq v1.2.0
+	github.com/plutov/paypal v2.0.5+incompatible // indirect
 	golang.org/x/crypto v0.0.0-20190308221718-c2843e01d9a2
 )
 

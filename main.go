@@ -3,11 +3,13 @@ package main
 import (
 	"database/sql"
 	"github.com/gin-contrib/gzip"
+	"github.com/gin-contrib/sessions"
+	"github.com/gin-contrib/sessions/cookie"
 	"github.com/gin-gonic/gin"
 	_ "github.com/lib/pq"
-	//_ "github.com/mattn/go-sqlite3"
 	"log"
 	"os"
+	"time"
 )
 
 var (
@@ -30,7 +32,15 @@ func main() {
 
 	router := gin.Default()
 
+	// Middlewares
 	router.Use(gzip.Gzip(gzip.DefaultCompression))
+
+	sessionStore := cookie.NewStore([]byte(os.Getenv("SESSION_KEY")))
+	sessionStore.Options(sessions.Options{
+		MaxAge: int(30 * time.Minute),
+		Path:   "/",
+	})
+	router.Use(sessions.Sessions("session", sessionStore))
 
 	router.Static("/static", "./static")
 	router.LoadHTMLGlob("templates/*/*.tmpl")

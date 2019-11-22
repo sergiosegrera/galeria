@@ -17,9 +17,9 @@ func home(c *gin.Context) {
 }
 
 func about(c *gin.Context) {
-	return
+	message(c, 200, "about", "Soon...")
 }
 
 func notFound(c *gin.Context) {
-	return
+	message(c, 404, "not found", "404 page not found")
 }
